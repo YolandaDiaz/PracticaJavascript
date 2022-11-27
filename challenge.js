@@ -119,8 +119,24 @@ switch (button) {
     });
     break;
   case 7:
+    let NumFemale = 0;
+    let NumMale = 0;
+    students.find(char => {
+    if (char.gender == "female") {
+        NumFemale++}
+        if (char.gender == "male") {
+        NumMale ++  
+        } 
+    });
+    console.log("En clase hay", NumFemale, "chicas, y", NumMale, "chicos.")
     break;
-  case 8:
+  case 8://No funciona
+    let result = students.every( function() {
+      if (students.gender == "female")
+      return
+    })
+  
+    console.log("¿Todos los alumnos de la clase son chicas?", result)
     break;
   case 9:
     break;
@@ -141,15 +157,14 @@ switch (button) {
       } if (a.age < b.age) {
           return -1;
       } return 0;
-  });
+    });
     let NameYoung = students.at(0).name;
     console.log("La persona más joven de la clase es:", NameYoung)
     break;
-  case 12: /*en pruebas*/
-    let ages = students.reduce ((sum, n) => sum.age + n.age, 0);
-    console.log(ages);
-    let average = ages / students.length;
-    console.log(average);
+  case 12:
+    const allAges = students.reduce ((sum, n) => sum + n.age, 0);
+    const average = allAges / students.length;
+    console.log("La edad media de todos los alumnos de la clase es:",average);
     break;
   case 13:
     break;
