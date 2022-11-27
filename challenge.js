@@ -67,7 +67,6 @@ function getNumberFromConsole() {
             if (isInt(num)) {
                 num = Number.parseInt(num);
                 resolve(num);
-                console.log(resolve(num))
             } else {
                 reject("Introduce un número");
             }
@@ -78,14 +77,16 @@ function getNumberFromConsole() {
 
 //consumidor
 async function main(){
+  
    do {
+    const button = await getNumberFromConsole();
     try {
-        const button = await getNumberFromConsole();
-        console.log(button);
+        //const button = await getNumberFromConsole();
+        console.log("Ha seleccionado la opción número:", button);
         SelectOption(button);
     } catch (error) {
         console.log("Tienes que introducir un número")
-    }} while (button > 0 && button <=19)
+    }} while ((button > 0) && (button <=18))
 }
 
 function SelectOption(button) {
@@ -95,7 +96,7 @@ switch (button) {
     console.table (students);
     break;
   case 2:
-    console.log(students.length)
+    console.log("En clase hay:", students.length, "alumnos.")
     break;
   case 3:
     let nameStudents = students.map( function(students){
@@ -105,11 +106,17 @@ switch (button) {
     break;
   case 4:
     students.pop();
+    console.log ("Se ha eliminado el último alumno de la clase");
+    break;
   case 5:
-
+    students.splice(calculateRandomNumber(0, students.length-1),1);
+    console.log("se ha eliminado una alumno aleatoriamente de la clase.")
     break;
   case 6:
-    //students.forEach (students.gender === "female" => console.log())
+    students.find(char => {
+      if (char.gender == "female") {
+          console.log("Los datos de las alumnas femeninas son:", char)}
+    });
     break;
   case 7:
     break;
@@ -118,6 +125,14 @@ switch (button) {
   case 9:
     break;
   case 10:
+    let newGender = availableGenders.at(calculateRandomNumber(0,1));
+    let newName = newGender === "male" ? availableMaleNames.at(calculateRandomNumber(0,5)) : availableFemaleNames.at(calculateRandomNumber(0,5));
+    students.push({
+      age: calculateRandomNumber(20, 50),
+      examScores: [],
+      gender: newGender,
+      name: newName})
+    console.log ("Se ha agregado un nuevo alumno a la clase.");
     break;
   case 11:
     break;
@@ -130,6 +145,7 @@ switch (button) {
   case 13:
     break;
   case 14:
+
     break;
   case 15:
     break;
