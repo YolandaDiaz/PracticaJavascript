@@ -135,6 +135,15 @@ switch (button) {
     console.log ("Se ha agregado un nuevo alumno a la clase.");
     break;
   case 11:
+    students.sort(function (a,b) {
+      if (a.age > b.age) {
+          return 1;
+      } if (a.age < b.age) {
+          return -1;
+      } return 0;
+  });
+    let NameYoung = students.at(0).name;
+    console.log("La persona más joven de la clase es:", NameYoung)
     break;
   case 12: /*en pruebas*/
     let ages = students.reduce ((sum, n) => sum.age + n.age, 0);
@@ -145,7 +154,8 @@ switch (button) {
   case 13:
     break;
   case 14:
-
+    //students.forEach(n.at(n,1) => n.push(calculateRandomNumber(0,10)))
+      
     break;
   case 15:
     break;
