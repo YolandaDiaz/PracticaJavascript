@@ -23,8 +23,3 @@ Cuando ejecutamos la aplicación, aparece el listado completo de requisitos. El 
 ### 13- Mostrar por consola la edad media de las chicas de la clase.
 ### 14- Añadir nueva nota a los alumnos.
 ### 15- Ordenar el array de alumnos alfabéticamente según su nombre.
-
-## Requisitos opcionales
-### 16- Mostrar por consola el alumno de la clase con las mejores notas.
-### 17- Mostrar por consola la nota media más alta de la clase y el nombre del alumno al que pertenece.
-### 18- Añadir un punto extra a cada nota existente de todos los alumnos. Recordad que la nota máxima posible es 10. Si los alumnos aún no tienen registrada ninguna nota, les pondremos un 10.
