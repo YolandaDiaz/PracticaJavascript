@@ -11,17 +11,8 @@ const rl = readline.createInterface({
 });
 //Convertir los inputs en integers
 function isInt(str){
-    // returns a boolean
     return /^[0-9]+$/.test(str)
   }
-const isInt2 = (str) => {
-    const integer = parseInt(str);
-    if (Number.isNaN(integer)) {
-        return false 
-    } else {
-        return true
-    }
-}
 //Datos iniciales
 const students = [{
     age: 32,
@@ -39,7 +30,9 @@ const students = [{
   const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlos'];
   const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
   const availableGenders = ['male', 'female'];
-  const opciones = ["1- Mostrar en formato de tabla todos los alumnos.",
+  const opciones = [
+  "Estas son las opciones disponibles:",
+  "1- Mostrar en formato de tabla todos los alumnos.",
   "2- Mostrar por consola la cantidad de alumnos que hay en clase.",
   "3- Mostrar por consola todos los nombres de los alumnos.",
   "4- Eliminar el último alumno de la clase.",
@@ -62,7 +55,7 @@ const students = [{
 function getNumberFromConsole() {
     const promise = new Promise((resolve, reject) => { 
         console.log(opciones);
-        rl.question('Escoge una opción de 1 a 18. Pulsa 0 para salir. ', (num) => {
+        rl.question('Escoge una opción de 1 a 18. O pulsa 0 para salir. ', (num) => {
             rl.pause();
             if (isInt(num)) {
                 num = Number.parseInt(num);
@@ -83,7 +76,7 @@ async function main(){
     try {
         console.log("Ha seleccionado la opción número:", button);
         SelectOption(button);
-    } catch (error) {
+    } catch (reject) {
         console.log("Tienes que introducir un número")
     }} while ((button > 0) && (button <=18))
 }
@@ -176,8 +169,8 @@ switch (button) {
     console.log("La edad media de todas las alumnas de la clase es:",averageGirls);
     break;
   case 14:
-    //students.forEach(n.at(n,1) => n.push(calculateRandomNumber(0,10)))
-      
+    students.forEach(n => n.examScores.push(calculateRandomNumber(0,10)));
+    console.log("Se ha añadido una nueva nota a cada alumno");
     break;
   case 15:
     students.sort(function (a,b) {
