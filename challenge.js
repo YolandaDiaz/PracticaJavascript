@@ -1,22 +1,19 @@
-
 import readline from 'readline';
-
+//cálculo de número aleatorio
 function calculateRandomNumber(min, max) {
     const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
     return randomNumber;
 }
-
-// configuramos la utilidad de node para que los datos se pidan y se muestren por consola.
+// configurar la utilidad de node para que los datos se pidan y se muestren por consola.
 const rl = readline.createInterface({
     input: process.stdin, 
     output: process.stdout, 
 });
-
+//Convertir los inputs en integers
 function isInt(str){
     // returns a boolean
     return /^[0-9]+$/.test(str)
   }
-
 const isInt2 = (str) => {
     const integer = parseInt(str);
     if (Number.isNaN(integer)) {
@@ -25,48 +22,73 @@ const isInt2 = (str) => {
         return true
     }
 }
+//Datos iniciales
+const students = [{
+    age: 32,
+    examScores: [],
+    gender: 'male',
+    name: 'edu'
+  },
+  {
+    age: 29,
+    examScores: [],
+    gender: 'female',
+    name: 'silvia'
+  }]
+  
+  const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlos'];
+  const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
+  const availableGenders = ['male', 'female'];
+  const opciones = ["1- Mostrar en formato de tabla todos los alumnos.",
+  "2- Mostrar por consola la cantidad de alumnos que hay en clase.",
+  "3- Mostrar por consola todos los nombres de los alumnos.",
+  "4- Eliminar el último alumno de la clase.",
+  "5- Eliminar un alumno aleatoriamente de la clase.",
+  "6- Mostrar por consola todos los datos de los alumnos que son chicas.",
+  "7- Mostrar por consola el número de chicos y chicas que hay en la clase.",
+  "8- Mostrar true o false por consola si todos los alumnos de la clase son chicas.",
+  "9- Mostrar por consola los nombres de los alumnos que tengan entre 20 y 25 años.",
+  "10- Añadir un alumno nuevo con datos aleatorios.",
+  "11- Mostrar por consola el nombre de la persona más joven de la clase.",
+  "12- Mostrar por consola la edad media de todos los alumnos de la clase.",
+  "13- Mostrar por consola la edad media de las chicas de la clase.",
+  "14- Añadir nueva nota a los alumnos.",
+  "15- Ordenar el array de alumnos alfabéticamente según su nombre.",
+  "16- Mostrar por consola el alumno de la clase con las mejores notas.",
+  "17- Mostrar por consola la nota media más alta de la clase y el nombre del alumno al que pertenece.",
+  "18- Añadir un punto extra a cada nota existente de todos los alumnos"];
 
 // productor
 function getNumberFromConsole() {
     const promise = new Promise((resolve, reject) => { 
-        rl.question('Introduce el número: ', (num) => {
+        console.log(opciones);
+        rl.question('Escoge una opción de 1 a 18. Pulsa 0 para salir. ', (num) => {
             rl.pause();
             if (isInt(num)) {
                 num = Number.parseInt(num);
                 resolve(num);
                 console.log(resolve(num))
             } else {
-                reject('Has de introducir un número');
+                reject("Introduce un número");
             }
-        }}
+        })
     })
-
     return promise;
 }
-/* 
-  si utilizáis algún import en vuestra solución, recordad que hay que indicarle a node 
-  que estamos utilizando módulos. Para ello, debemos incluir el fichero package.json que 
-  veis en este repositorio. En caso de que no os funcione, contactadme por discord.
-*/
 
-const students = [{
-  age: 32,
-  examScores: [],
-  gender: 'male',
-  name: 'edu'
-},
-{
-  age: 29,
-  examScores: [],
-  gender: 'female',
-  name: 'silvia'
-}]
+//consumidor
+async function main(){
+   do {
+    try {
+        const button = await getNumberFromConsole();
+        console.log(button);
+        SelectOption(button);
+    } catch (error) {
+        console.log("Tienes que introducir un número")
+    }} while (button > 0 && button <=19)
+}
 
-const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlos'];
-const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
-const availableGenders = ['male', 'female'];
-
-let button = prompt ("Introduce un número del 0 al 18, para escoger una opción");
+function SelectOption(button) {
 
 switch (button) {
   case 1:
@@ -82,13 +104,12 @@ switch (button) {
     console.log (nameStudents);
     break;
   case 4:
-    students.pop(); /*recuerda que students es una constante, antes de nada, deberé conertirla a variable*/
-    break;
+    students.pop();
   case 5:
 
     break;
   case 6:
-    students.forEach (students.gender === "female" => console.log())
+    //students.forEach (students.gender === "female" => console.log())
     break;
   case 7:
     break;
@@ -103,7 +124,7 @@ switch (button) {
   case 12: /*en pruebas*/
     let ages = students.reduce ((sum, n) => sum.age + n.age, 0);
     console.log(ages);
-    let averahe = ages / students.length;
+    let average = ages / students.length;
     console.log(average);
     break;
   case 13:
@@ -120,4 +141,6 @@ switch (button) {
     break;
   default:
   console.log ("Fin del programa")
-}
+}}
+
+main();
