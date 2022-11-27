@@ -30,7 +30,7 @@ const students = [{
     name: 'edu'
   },
   {
-    age: 29,
+    age: 24,
     examScores: [],
     gender: 'female',
     name: 'silvia'
@@ -77,11 +77,10 @@ function getNumberFromConsole() {
 
 //consumidor
 async function main(){
-  
+    let button;
    do {
-    const button = await getNumberFromConsole();
+    button = await getNumberFromConsole();
     try {
-        //const button = await getNumberFromConsole();
         console.log("Ha seleccionado la opción número:", button);
         SelectOption(button);
     } catch (error) {
@@ -130,15 +129,15 @@ switch (button) {
     });
     console.log("En clase hay", NumFemale, "chicas, y", NumMale, "chicos.")
     break;
-  case 8://No funciona
-    let result = students.every( function() {
-      if (students.gender == "female")
-      return
-    })
-  
-    console.log("¿Todos los alumnos de la clase son chicas?", result)
+  case 8:
+    const areFemale = (student) => student.gender == "female";
+    console.log("¿Todos los alumnos de la clase son chicas?", students.every(areFemale));
     break;
   case 9:
+    students.filter(function (twenties) {
+      if (twenties.age >= 20 && twenties.age <= 25)
+      return console.log(twenties.name, "tiene entre 20 y 25 años.")
+    })
     break;
   case 10:
     let newGender = availableGenders.at(calculateRandomNumber(0,1));
@@ -167,12 +166,30 @@ switch (button) {
     console.log("La edad media de todos los alumnos de la clase es:",average);
     break;
   case 13:
+    let onlyGirls = [];
+    students.find(char => {
+    if (char.gender == "female") {
+         onlyGirls.push(char) }
+    });
+    const girlsAges = onlyGirls.reduce ((sum, n) => sum + n.age, 0);
+    const averageGirls = girlsAges / onlyGirls.length;
+    console.log("La edad media de todas las alumnas de la clase es:",averageGirls);
     break;
   case 14:
     //students.forEach(n.at(n,1) => n.push(calculateRandomNumber(0,10)))
       
     break;
   case 15:
+    students.sort(function (a,b) {
+      const namesA = a.name.toLowerCase();
+      const namesB = b.name.toLowerCase();
+      if (a.name > b.name) {
+          return 1;
+      } if (a.name < b.name) {
+          return -1;
+      } return 0;
+  })
+  console.log("Los alumnos ordenados alfabéticamente por su nombre quedan así:", students)
     break;
   case 16:
     break;
